@@ -1,0 +1,39 @@
+.graphParent {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent horizontal scrolling */
+  gap: 20px; /* Space between columns */
+}
+
+.graphFormSection {
+  flex: 0 0 300px; /* Fixed width for the form section */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.graphheader {
+  text-align: center;
+}
+
+.graphInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.graphSection {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Prevent overflow */
+}
+
+.graphCanvas {
+  width: 100%;
+  height: 100%;
+  max-width: 600px; /* Restrict the size of the graph */
+  max-height: 400px; /* Restrict the size of the graph */
+}

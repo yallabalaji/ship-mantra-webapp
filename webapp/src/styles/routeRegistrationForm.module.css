@@ -1,0 +1,67 @@
+.routeRegisterForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .routeRegisterForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 600px; /* Prevent form from expanding */
+  }
+  
+  .routeRegisterForm label {
+    margin-bottom: 5px;
+  }
+  
+  .routeRegisterForm input,
+  .routeRegisterForm select {
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .routeRegisterForm button {
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  .hubList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid; /* Border without color */
+  }
+  
+  .hubList li {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .hubList li:hover {
+    background-color: var(--hover-bg-color); /* Use a variable for hover background color */
+  }
+  
+  .selectedHubs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    max-width: 100%; /* Ensure selected hubs wrap to the next line */
+  }
+  
+  .hubTag {
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-green); /* WhatsApp theme color */
+    color: var(--light-text); /* White text */
+  }
+  
+  .selectedHubs > * {
+    flex: 1 1 auto; /* Allow chips to take up available space and wrap */
+    box-sizing: border-box;
+  }

@@ -7,7 +7,7 @@ import styles from '../styles/routeRegistrationForm.module.css';
 
 // Define types for the form data
 interface RouteRegisterFormProps {
-  onSubmit: (data: { routeName: string; sourceCity: string; destinationCity: string; hubs: string[] }) => void;
+  onSubmit: (data: { routeName: string; sourceCity: string; destinationCity: string; hubs: string[]; intermediateCities: string[] }) => void;
 }
 
 interface Hub {
@@ -121,14 +121,22 @@ const RouteRegisterForm: React.FC<RouteRegisterFormProps> = ({ onSubmit }) => {
       return;
     }
 
+    const intermediateCities = hubs
+      .filter(hub => hub.name !== sourceCity && hub.name !== destinationCity)
+      .map(hub => {
+        const hubData = allHubs.find(h => h._id === hub.id);
+        return hubData ? hubData.hubCity : '';
+      })
+      .filter(city => city !== '');
+
     setError('');
-    onSubmit({ routeName, sourceCity, destinationCity, hubs: hubs.map(hub => hub.id) });
+    onSubmit({ routeName, sourceCity, destinationCity, hubs: hubs.map(hub => hub.id), intermediateCities });
 
     try {
       const response = await fetch("http://localhost:5000/routes/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ routeName, sourceCity, destinationCity, hubs: hubs.map(hub => hub.id) }),
+        body: JSON.stringify({ routeName, sourceCity, destinationCity, hubs: hubs.map(hub => hub.id), intermediateCities }),
       });
 
       const data = await response.json();
@@ -245,8 +253,7 @@ const RouteRegisterForm: React.FC<RouteRegisterFormProps> = ({ onSubmit }) => {
               label={hub.name}
               onDelete={() => handleRemoveHub(hub.id)}
               className={styles.hubTag}
-              sx={{ backgroundColor: '#FFFDD0', color: 'black' }} // Light cream white background with black text
-            />
+              sx={{ backgroundColor: '#FFFDD0', color: 'black' }}             />
           ))}
         </Stack>
       </div>

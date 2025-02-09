@@ -20,8 +20,11 @@ const RoutePlannerDashboard = () => {
       <button onClick={() => navigate("/hub-register")} style={{ margin: "10px" }}>
         Manage Hubs
       </button>
-      <button onClick={() => navigate("/routes")} style={{ margin: "10px" }}>
+      <button onClick={() => navigate("/route-registration")} style={{ margin: "10px" }}>
         Manage Routes
+      </button>
+      <button onClick={() => navigate("/view-graphs")} style={{ margin: "10px" }}>
+        Find Routes
       </button>
       <button onClick={() => navigate("/logout")} style={{ margin: "10px", color: "brown" }}>
         Logout

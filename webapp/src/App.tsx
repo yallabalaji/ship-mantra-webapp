@@ -8,6 +8,7 @@ import HubViewPage from "./pages/HubViewPage";
 import GraphPage from "./pages/GraphPage";
 import routes from "./routes";
 import RouteRegistrationPage from "./pages/RouteRegistration";
+import RouteViewPage from "./pages/RouteViewPage";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <Route path={routes.hubView} element={<HubViewPage />} />
       <Route path={routes.graphPage} element={<GraphPage />} />
       <Route path={routes.routeRegistration} element={<RouteRegistrationPage />} />
+      <Route path={routes.routeViewPage} element={<RouteViewPage />} />
       </Routes>
     </Router>
   );

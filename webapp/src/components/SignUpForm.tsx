@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/signUpForm.module.css';
+import API from '../api/axiosInstance';
 
 
 // Define types for the form data
@@ -37,15 +38,11 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
     let roles : string[] = [];
     roles.push(role);
     try {
-        const response = await fetch("http://localhost:5000/auth/signIn", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password, roles }),
-        });
-  
-        const data = await response.json();
-  
-        if (response.ok) {
+        const API_URL = "/auth/signIn";
+        const response = await API.post(API_URL, { username, password, roles });
+        const data = await response.data;
+
+        if (response.status.toString().startsWith('2')) {
           onSuccess(roles[0],data.message);
           setSuccessMessage(data.message);
           

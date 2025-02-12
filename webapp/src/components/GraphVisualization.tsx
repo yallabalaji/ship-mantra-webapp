@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import {ForceGraph3D} from 'react-force-graph';
 import styles from '../styles/graphVisualization.module.css';
 import API from '../api/axiosInstance';

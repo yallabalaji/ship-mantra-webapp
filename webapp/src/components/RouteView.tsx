@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import DataTable from 'react-data-table-component';
+import API from '../api/axiosInstance';
 
 const RouteView: React.FC = () => {
   // State for the table data and loading state
@@ -13,7 +13,7 @@ const RouteView: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/routes');
+        const response = await API.get('/routes');
         setData(response.data);
         setFilteredData(response.data); // Set initial filtered data
         setLoading(false);

@@ -28,7 +28,7 @@ const LoginPage = () => {
         window.location.href = "/route-planner";
         break;
       case "RouteUser":
-        window.location.href = "/find-route";
+        window.location.href = "/route-user";
         break;
       default:
         setError("Invalid role");

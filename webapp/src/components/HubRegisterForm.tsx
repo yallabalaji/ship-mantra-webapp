@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API from '../api/axiosInstance';
 
 // Define types for the form data
 interface HubRegisterFormProps {
@@ -33,15 +34,11 @@ const HubRegisterForm: React.FC<HubRegisterFormProps> = ({ onSubmit }) => {
     onSubmit({ hubCode, hubCity, hubName, isCentral });
 
     try {
-        const response = await fetch("http://localhost:5000/hub/createhub", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ hubCode, hubName, hubCity, isCentral }),
-        });
+        const API_URL = "/hub/createhub";
+        const response = await API.post(API_URL, { hubCode, hubName, hubCity, isCentral });
+        const data = await response.data;
   
-        const data = await response.json();
-  
-        if (response.ok) {
+        if (response.status.toString().startsWith('2')) {
           onSuccess(hubCode, hubName, hubCity);
           setSuccessMessage("Hub registered successfully");
           

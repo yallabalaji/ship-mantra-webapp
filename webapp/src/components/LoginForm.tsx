@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../styles/login.module.css';
+import API from '../api/axiosInstance';
 
 interface LoginFormProps {
   onError: (message: string) => void;
@@ -15,17 +16,16 @@ const LoginForm: React.FC<LoginFormProps> = ({ onError, onSuccess }) => {
     onError(""); // Clear previous errors
 
     try {
-      const response = await fetch("http://localhost:5000/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
 
-      const data = await response.json();
+      const API_URL = "/auth/login";
+      const response = await API.post(API_URL, { username, password });
+      const data = await response.data;
 
-      if (response.ok) {
-        // Assuming backend returns { message: "success", email, role: ["routeplanner"] }
-        localStorage.setItem("email", JSON.stringify(data));
+      if (response.status.toString().startsWith('2')) {
+        localStorage.setItem("email", data.username);
+        localStorage.setItem("role", data.role[0]);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userRole", data.role[0]);
         onSuccess(data.role[0]);
       } else {
         onError(data.message || "Login failed");

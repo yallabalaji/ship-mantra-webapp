@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import DataTable from 'react-data-table-component';
+import API from '../api/axiosInstance';
 
 const HubView: React.FC = () => {
   // State for the table data and loading state
@@ -17,7 +17,7 @@ const HubView: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/hub/allhubs');
+        const response = await API.get('/hub/allhubs');
         setData(response.data);
         setFilteredData(response.data); // Set initial filtered data
         setLoading(false);

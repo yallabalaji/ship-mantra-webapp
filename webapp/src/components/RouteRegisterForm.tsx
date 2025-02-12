@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import styles from '../styles/routeRegistrationForm.module.css';
+import API from '../api/axiosInstance';
 
 // Define types for the form data
 interface RouteRegisterFormProps {
@@ -35,8 +35,8 @@ const RouteRegisterForm: React.FC<RouteRegisterFormProps> = ({ onSubmit }) => {
   useEffect(() => {
     const fetchHubs = async () => {
       try {
-        const response = await axios.get<Hub[]>('http://localhost:5000/hub/allhubs');
-        console.log('Fetched hubs:', response.data);
+        const API_URL = "/hub/allhubs";
+        const response = await API.get<Hub[]>(API_URL);
         setAllHubs(response.data);
       } catch (error) {
         console.error('Error fetching hubs:', error);
@@ -133,15 +133,12 @@ const RouteRegisterForm: React.FC<RouteRegisterFormProps> = ({ onSubmit }) => {
     onSubmit({ routeName, sourceCity, destinationCity, hubs: hubs.map(hub => hub.id), intermediateCities });
 
     try {
-      const response = await fetch("http://localhost:5000/routes/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ routeName, sourceCity, destinationCity, hubs: hubs.map(hub => hub.id), intermediateCities }),
-      });
 
-      const data = await response.json();
+      const API_URL = "/routes/create";
+      const response = await API.post(API_URL, { routeName, sourceCity, destinationCity, hubs: hubs.map(hub => hub.id), intermediateCities });
+      const data = await response.data;
 
-      if (response.ok) {
+      if (response.status.toString().startsWith('2')) {
         setSuccessMessage("Route registered successfully");
       } else {
         setError(data.message || "Registration failed");
@@ -162,7 +159,6 @@ const RouteRegisterForm: React.FC<RouteRegisterFormProps> = ({ onSubmit }) => {
     navigate('/view-routes'); // Redirects to /view-routes page
   };
 
-  const availableHubs = allHubs.filter(hub => !hubs.some(h => h.id === hub._id));
 
   return (
     <div className={styles.routeRegisterForm}>

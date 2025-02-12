@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {ForceGraph3D} from 'react-force-graph';
 import styles from '../styles/graphVisualization.module.css';
+import API from '../api/axiosInstance';
 
 interface GraphData {
   graph: Record<string, string[]>; // Connections between hubs
@@ -50,7 +51,7 @@ const GraphVisualization: React.FC = () => {
       // Fetch all cities
       const fetchCities = async () => {
         try {
-          const response = await axios.get<string[]>('http://localhost:5000/hub/valid-cities');
+          const response = await API.get<string[]>('/hub/valid-cities');
           setCities(response.data);
         } catch (error) {
           console.error('Error fetching cities:', error);
@@ -65,7 +66,7 @@ const GraphVisualization: React.FC = () => {
       const fetchSourceHubs = async () => {
         if (sourceCity) {
           try {
-            const response = await axios.get<string[]>(`http://localhost:5000/hub/available?city=${sourceCity}`);
+            const response = await API.get<string[]>(`/hub/available?city=${sourceCity}`);
             setSourceHubs(response.data);
           } catch (error) {
             console.error('Error fetching source hubs:', error);
@@ -81,7 +82,7 @@ const GraphVisualization: React.FC = () => {
       const fetchDestinationHubs = async () => {
         if (destinationCity) {
           try {
-            const response = await axios.get<string[]>(`http://localhost:5000/hub/available?city=${destinationCity}`);
+            const response = await API.get<string[]>(`/hub/available?city=${destinationCity}`);
             setDestinationHubs(response.data);
           } catch (error) {
             console.error('Error fetching destination hubs:', error);
@@ -103,13 +104,13 @@ const GraphVisualization: React.FC = () => {
   
     const fetchGraphData = async () => {
       try {
-        const API_URL = "http://localhost:5000/routes/find-routes";
-        const response = await axios.post<GraphData>(API_URL, {
+        const API_URL = "/routes/find-routes";
+        const response = await API.post<GraphData>(API_URL, {
           sourceHub,
           destinationHub,
         });
   
-        const data = response.data;
+        const data = await response.data;
         const nodes: Node[] = [];
         const links: Link[] = [];
   

@@ -1,5 +1,5 @@
 import HubRegisterForm from '../components/HubRegisterForm';
-import styles from '../styles/HubRegisterForm.module.css';
+import styles from '../styles/hubRegisterForm.module.css';
 import { useEffect } from 'react';
 
 const HubRegisterPage: React.FC = () => {

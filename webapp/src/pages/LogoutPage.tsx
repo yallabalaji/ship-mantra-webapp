@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "../styles/Dashboard.module.css";
+import styles from "../styles/dashboard.module.css";
 
 const Logout = () => {
   const navigate = useNavigate();

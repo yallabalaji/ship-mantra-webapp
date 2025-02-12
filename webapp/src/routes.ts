@@ -1,6 +1,7 @@
 const routes = {
     home: "/",
     login: "/login",
+    logout: "/logout",
     dashboard: "/dashboard",
     profile: "/profile",
     signup: "/register-user",  // Add a new route for SignUpPage
@@ -10,6 +11,7 @@ const routes = {
     graphPage : "/view-graphs", // Add a new route for GraphPage
     routeRegistration : "/route-registration", // Add a new route for RouteRegistrationPage
     routeViewPage : "/view-routes", // Add a new route for RouteViewPage
+    userDashboard : "/route-user", // Add a new route for RouteUserDashboard
   };
   
   export default routes;

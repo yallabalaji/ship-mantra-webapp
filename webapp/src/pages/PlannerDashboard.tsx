@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import styles from "../styles/Dashboard.module.css";
+import styles from "../styles/dashboard.module.css";
 import { useEffect } from "react";
 
 const RoutePlannerDashboard = () => {

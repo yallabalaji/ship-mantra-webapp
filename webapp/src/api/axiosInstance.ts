@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 
 const API = axios.create({
-    baseURL: "http://localhost:5000", // Change this to match your backend URL
+    baseURL: "https://ship-mantra.onrender.com", // Change this to match your backend URL
 });
 
 // Define a function to get the token safely

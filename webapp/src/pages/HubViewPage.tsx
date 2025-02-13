@@ -1,11 +1,10 @@
 import React from 'react';
-import HubView from '../components/HubView';  // Import HubView component
+import HubViewPagination from '../components/HubViewPagination';
 
 const HubViewPage: React.FC = () => {
   return (
     <div className="page-container">
-      {/* Rendering the HubView Component */}
-      <HubView />
+      <HubViewPagination/>
     </div>
   );
 };

@@ -1,11 +1,10 @@
 import React from 'react';
-import RouteView from '../components/RouteView';  // Import RouteView component
+import RouteViewPagination from '../components/RouteViewPagination';
 
 const RouteViewPage: React.FC = () => {
   return (
     <div className="page-container">
-      {/* Rendering the RouteView Component */}
-      <RouteView />
+      <RouteViewPagination />
     </div>
   );
 };
